@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-        home: const LoginPage(),
+        home:  LoginPage(),
 
 
         initialRoute: FirebaseAuth.instance.currentUser == null
