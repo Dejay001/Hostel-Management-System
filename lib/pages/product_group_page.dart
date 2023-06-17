@@ -1,7 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:antoh/MODEL/addedproduct.dart';
+import 'package:hostelmanagement/MODEL/addedproduct.dart';
 import '../utils/color_palette.dart';
 import '../widget/product_card.dart';
 import 'addestate.dart';
@@ -148,44 +148,44 @@ class ProductGroupPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Expanded(
-                            child: StreamBuilder(
-                              stream: _firestore
-                                  .collection("Estates")
-                                  .where("group", isEqualTo: name)
-
-                                  .snapshots(),
-                              builder: (
-                                BuildContext context,
-                                AsyncSnapshot<
-                                        QuerySnapshot<Map<String, dynamic>>>
-                                    snapshot,
-                              ) {
-                                if (!snapshot.hasData) {
-                                  return  Center(
-                                    child: SizedBox(
-                                      height: 40,
-                                      width: 40,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return ListView.builder(
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return ProductCard(
-                                    Product: addedProduct.fromMap( snapshot.data!.docs[index].data(),),
-                                    docID: snapshot.data!.docs[index].id,
-                                    );
-                                  },
-                                );
-
-                              },
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: StreamBuilder(
+                          //     stream: _firestore
+                          //         .collection("Estates")
+                          //         .where("group", isEqualTo: name)
+                          //
+                          //         .snapshots(),
+                          //     builder: (
+                          //       BuildContext context,
+                          //       AsyncSnapshot<
+                          //               QuerySnapshot<Map<String, dynamic>>>
+                          //           snapshot,
+                          //     ) {
+                          //       if (!snapshot.hasData) {
+                          //         return  Center(
+                          //           child: SizedBox(
+                          //             height: 40,
+                          //             width: 40,
+                          //             child: CircularProgressIndicator(
+                          //               color: Colors.black,
+                          //             ),
+                          //           ),
+                          //         );
+                          //       }
+                          //       return ListView.builder(
+                          //         itemCount: snapshot.data!.docs.length,
+                          //         itemBuilder:
+                          //             (BuildContext context, int index) {
+                          //           return ProductCard(
+                          //           Product: addedProduct.fromMap( snapshot.data!.docs[index].data(),),
+                          //           docID: snapshot.data!.docs[index].id,
+                          //           );
+                          //         },
+                          //       );
+                          //
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

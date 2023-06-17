@@ -17,6 +17,7 @@ void main() async {
 
 
 DatabaseReference Hos = FirebaseDatabase.instance.ref().child("Hotels");
+DatabaseReference EstateList = FirebaseDatabase.instance.ref().child("Hotels");
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,17 +1,15 @@
 import 'dart:io';
 
 // import 'package:antoh/Pages/homepage.dart';
-import 'package:antoh/functions/toast.dart';
-import 'package:antoh/main.dart';
-import 'package:antoh/MODEL//Users.dart';
 
-import 'package:antoh/utils/color_palette.dart';
-import 'package:antoh/widget/progressDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/MODEL/Users.dart';
+import 'package:hostelmanagement/utils/color_palette.dart';
+import 'package:hostelmanagement/widget/progressDialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io' as io;
@@ -19,6 +17,7 @@ import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 import '../MODEL/addedproduct.dart';
+import '../main.dart';
 class addproduct extends StatefulWidget {
   const addproduct({Key? key, this.group}) : super(key: key);
 final  String? group;
@@ -115,9 +114,9 @@ class _addproductState extends State<addproduct> {
               Navigator.of(context).pop();
               Navigator.of(context).pop();
 
-              showTextToast('Added Sucessfully!');
+              // showTextToast('Added Sucessfully!');
             }).catchError((e) {
-              showTextToast('Failed!');
+              // showTextToast('Failed!');
             });
             // Navigator.of(context).pop();
            },
