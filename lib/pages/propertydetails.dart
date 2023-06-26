@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:antoh/Screens/registration_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 // import 'package:catalogue/utils/color_palette.dart';

@@ -1,9 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/utils/InputValidator.dart';
 import 'package:provider/provider.dart';
-import 'package:antoh/screens/homepage.dart';
-import 'package:antoh/utils/InputValidator.dart';
-import 'package:antoh/provider/UserProvider.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
