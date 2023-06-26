@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/pages/product_group_page.dart';
 
-import '../Screens/product_group_page.dart';
 import '../utils/color_palette.dart';
 
 class ProductGroupCard extends StatelessWidget {

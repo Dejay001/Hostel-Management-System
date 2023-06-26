@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:antoh/screens/login_screen.dart';
+import 'package:hostelmanagement/pages/login.dart';
 
 class Sliderimg extends StatefulWidget {
   const Sliderimg({ Key? key }) : super(key: key);
@@ -110,7 +110,7 @@ class _SliderState extends State<Sliderimg> with TickerProviderStateMixin {
                             ),
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              LoginScreen()), (Route<dynamic> route) => false);
+                                  LoginPage()), (Route<dynamic> route) => false);
                             },
                             color: Theme.of(context).primaryColor,
                             padding: const EdgeInsets.only(right: 5, left: 30, top: 5, bottom: 5),

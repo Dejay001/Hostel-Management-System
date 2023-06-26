@@ -50,7 +50,7 @@ class Signup extends StatelessWidget {
             children: [
               Image(
                 image: AssetImage(
-                  'assets/images/back.jpg',
+                  'assets/images/house_01.jpg',
                 ),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,

@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/MODEL/addedproduct.dart';
 import 'package:hostelmanagement/pages/login.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
 
-import '../MODEL/addedproduct.dart';
 
 
 class ProductDetailsPage extends StatelessWidget {

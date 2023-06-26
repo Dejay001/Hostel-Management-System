@@ -1,5 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/pages/homepage.dart';
+import 'package:hostelmanagement/provider/UserProvider.dart';
 import 'package:hostelmanagement/utils/InputValidator.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final Map<String, dynamic> successInformation = await register(_userRegistration);
     if (successInformation['success']) {
 		   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-        HomePage()), (Route<dynamic> route) => false);
+           homepage()), (Route<dynamic> route) => false);
 
         AwesomeDialog(
         context: context,
@@ -264,7 +266,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
 
                     new Image.asset(
-                      'assets/images/antohlogo.png',
+                      'assets/images/house_01.jpg',
                       width: 600.0,
                       height: 240.0,
                       fit: BoxFit.cover,

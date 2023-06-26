@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:antoh/MODEL/DataModel.dart';
+import 'package:hostelmanagement/MODEL/DataModel.dart';
 
 class Detail extends StatelessWidget {
   final Property property;

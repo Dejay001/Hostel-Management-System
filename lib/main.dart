@@ -2,10 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/firebase_options.dart';
 import 'package:hostelmanagement/pages/homepage.dart';
 import 'package:hostelmanagement/pages/login.dart';
 import 'package:hostelmanagement/pages/signup.dart';
+import 'package:hostelmanagement/provider/ProportiesProvider.dart';
+import 'package:hostelmanagement/provider/UserProvider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +29,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return   MultiProvider(
+        providers: [
+
+
+        ChangeNotifierProvider<Users>(
+        create: (context) => Users(),),
+    ChangeNotifierProvider(
+    create: (_) => UserProvider(),
+    ),
+    ChangeNotifierProvider(
+    create: (_) => ProportiesProvider(),
+    ),
+    ],
+    child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -54,7 +71,7 @@ class MyApp extends StatelessWidget {
         }
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
 
-    );
+    ));
   }
 }
 
