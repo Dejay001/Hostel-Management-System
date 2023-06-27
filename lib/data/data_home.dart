@@ -7,9 +7,8 @@ class Category {
 
 List<Category> categoryList = [
   Category("Residential","assets/images/Residential.jpg"),
-  Category("Commercial","assets/images/commercial.jpg"),
+  Category("Standard","assets/images/commercial.jpg"),
   Category("Agricultural", "assets/images/land.jpg"),
-  Category("Industrial", "assets/images/industrial.jpg"),
   Category("Mixed-Use", "assets/images/mixeduse.jpg"),
   Category("Special Purpose", "assets/images/specialpurpose.jpg"),
 ];

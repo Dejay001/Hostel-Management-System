@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hostelmanagement/components/my_button.dart';
 import 'package:hostelmanagement/components/my_textfield.dart';
+import 'package:hostelmanagement/pages/admin.dart';
 import 'package:hostelmanagement/pages/homepage.dart';
 import 'package:hostelmanagement/pages/signup.dart';
 
@@ -231,10 +232,15 @@ class LoginPage extends StatelessWidget {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text);
-      //
-      // if (email.text == "merchantdaniel8@gmail.com") {
-      //   Navigator.of(context).pushNamed("/admin");
-      // } else
+
+
+      if(firebaseUser =="daniel@gmail.com"){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return admin();
+            }));
+      }
 
       if (firebaseUser != null) {
         Navigator.push(
@@ -246,24 +252,6 @@ class LoginPage extends StatelessWidget {
       } else {
         displayToast("Error: Cannot be signed in", context);
       }
-
-      //final User? firebaseUser = userCredential.user;
-      // if (firebaseUser != null) {
-      //   final DatabaseEvent event = await
-      //   //Admin.child(firebaseUser.uid).once();
-      //   BoardMembers.child(firebaseUser.uid).once();
-      //   // if (event.snapshot.value !=Admin) {
-      //   //   Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen,
-      //   //           (route) => false);
-      //   //   displayToast("Logged-in As Admin", context);
-      //   // }
-      //   if(event.snapshot.value !=BoardMembers){
-      //     Navigator.pushNamedAndRemoveUntil(context, VotersScreen.idScreen,
-      //             (route) => false);
-      //     displayToast("Logged-in As Board Member",
-      //         context);
-      //    // await _firebaseAuth.signOut();
-      //   }
 
     } catch (e) {
       // handle error

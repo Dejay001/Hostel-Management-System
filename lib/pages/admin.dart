@@ -42,7 +42,7 @@ class _adminState extends State<admin> {
           children: [
 
              Text(
-              "Antoh Admin",
+              "Hostel Management",
               style: TextStyle(
                 fontFamily: "Nunito",
                 fontSize: 18,
