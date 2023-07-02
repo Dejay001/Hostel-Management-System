@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hostelmanagement/MODEL/addedproduct.dart';
+import 'package:hostelmanagement/pages/product_details_page.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
 
 
 
-import '../MODEL/addedproduct.dart';
-import '../pages//product_details_page.dart';
 
 class ProductCard extends StatelessWidget {
 

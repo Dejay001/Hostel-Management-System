@@ -100,7 +100,7 @@ class ProductDetailsPage extends StatelessWidget {
                         ),
                         onPressed: () {
                           _firestore
-                              .collection("products")
+                              .collection("Estates")
                               .doc(docID)
                               .delete()
                               .then((value) {

@@ -26,11 +26,12 @@ class ProductGroupCard extends StatelessWidget {
         },
         child: Container(
 
+
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            color: Colors.white70,
+            borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
                 offset: const Offset(0, 5),
@@ -42,8 +43,10 @@ class ProductGroupCard extends StatelessWidget {
           child: Text(
             name!,
             style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
               fontFamily: "Nunito",
-              fontSize: 20,
+              fontSize: 18,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

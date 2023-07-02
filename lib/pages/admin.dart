@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:hostelmanagement/pages//registration_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,86 +28,17 @@ class admin extends StatefulWidget {
 class _adminState extends State<admin> {
 
   final TextEditingController _newProductGroup = TextEditingController();
-
+  double _sigmaX = 5; // from 0-10
+  double _sigmaY = 5; // from 0-10
+  double _opacity = 0.2;
+  double _width = 350;
+  double _height = 300;
   final addedProduct newProduct = addedProduct();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
 
-        automaticallyImplyLeading : false,
-        backgroundColor:    Colors.black,
-        centerTitle: true,
-        title:         Row(
-          children: [
-
-             Text(
-              "Hostel Management",
-              style: TextStyle(
-                fontFamily: "Nunito",
-                fontSize: 18,
-                color: ColorPalette.white,
-              ),
-            ),
-          ],
-        ),
-        actions: [ Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: IconButton(
-            onPressed: () {
-
-
-              showDialog<void>(
-                context: context,
-                barrierDismissible: false, // user must tap button!
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Sign Out'),
-                    backgroundColor: Colors.white,
-                    content: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          Text('Are you certain you want to Sign Out?'),
-                        ],
-                      ),
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text(
-                          'Yes',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () {
-                          print('yes');
-                          FirebaseAuth.instance.signOut();
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "/SignIn", (route) => false);
-                          // Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.black38,
-            ),
-          ),
-        ),],
-
-      ),
 
       body:
         SafeArea(
@@ -116,6 +48,7 @@ class _adminState extends State<admin> {
             width: double.infinity,
             child: Column(
               children: [
+
                 Row(
                   children: [
                     Padding(
@@ -133,8 +66,16 @@ class _adminState extends State<admin> {
                         width: 170,
                         height: 160,
 
-                        decoration: const BoxDecoration(
-                          color:Colors.white,
+                        decoration:  BoxDecoration(
+
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(0, 5),
+                              blurRadius: 6,
+                              color: const Color(0xff000000).withOpacity(0.16),
+                            ),
+                          ],
+                          color:Colors.white70,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(36),
                             topRight: Radius.circular(36),
@@ -150,11 +91,13 @@ class _adminState extends State<admin> {
                           children: [
                             Row(
                               children: [
-                                Text("Hi",style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold
-
-                                ),),
+                                // Text("Hi",style: TextStyle(
+                                //   fontSize: 50,
+                                //   fontWeight: FontWeight.bold
+                                //
+                                // ),
+                                //
+                                // ),
 
 
 
@@ -227,19 +170,19 @@ class _adminState extends State<admin> {
                                                         try {
                                                           final DocumentSnapshot<Map<String, dynamic>>
                                                           _doc = await _firestore
-                                                              .collection("Utiles")
-                                                              .doc("EstateCategories ")
+                                                              .collection("Utils")
+                                                              .doc("estcategory")
                                                               .get();
                                                           final List<dynamic> _tempList =
-                                                          _doc.data()!['list'] as List<dynamic>;
+                                                          _doc.data()!["List"] as List<dynamic>;
                                                           if (_tempList.contains(_newProductGroup.text)) {
                                                             displayToast("Group Name already created",context,);
                                                           } else {
                                                             _tempList.add(_newProductGroup.text);
                                                             _firestore
-                                                                .collection('Utiles')
-                                                                .doc("EstateCategories ")
-                                                                .update({'list': _tempList});
+                                                                .collection('Utils')
+                                                                .doc("estcategory")
+                                                                .update({'List': _tempList});
                                                             displayToast("Added Successfully",context,);
                                                           }
                                                         } catch (e) {
@@ -292,7 +235,8 @@ class _adminState extends State<admin> {
                                       //
                                       // },
                                       child: Icon(Icons.add,
-                                      color:   Color.fromRGBO(216, 78, 16, 1),)),
+                                      size: 67,
+                                      color:   Color.fromRGBO(0, 0, 16, 1),)),
                                 ),
 
 
@@ -305,53 +249,70 @@ class _adminState extends State<admin> {
                     ),
                   ],
                 ),
-     SizedBox(height: 28,),
-                Expanded(
-                  child: StreamBuilder(
-                    stream:
-                    _firestore.collection("Utiles").snapshots(),
-                    builder: (
-                        BuildContext context,
-                        AsyncSnapshot<
-                            QuerySnapshot<Map<String, dynamic>>>
-                        snapshot,
-                        ) {
-                      if (snapshot.hasData) {
-                        final List<dynamic> _productGroups =
-                        snapshot.data!.docs[0].data()['List']
-                        as List<dynamic>;
-                        _productGroups.sort();
-                        return GridView.builder(
-                          gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 2,
-                            crossAxisSpacing: 30,
-                            mainAxisSpacing: 20,
-                          ),
-                          itemCount: _productGroups.length,
-                          itemBuilder: (context, index) {
-                            return ProductGroupCard(
-                              name: _productGroups[index] as String,
-                              key: UniqueKey(),
+
+
+
+     SizedBox(height: 20,),
+   Container(
+          padding:
+          const EdgeInsets.symmetric(horizontal: 0.0),
+          decoration: BoxDecoration(
+              color: Color.fromRGBO(3, 0, 0, 1)
+                  .withOpacity(_opacity),
+              borderRadius: const BorderRadius.all(
+                  Radius.circular(30))),
+          width: MediaQuery.of(context).size.width * 0.96,
+          height: MediaQuery.of(context).size.height * 0.58,
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Container(
+                    child: StreamBuilder(
+                      stream:
+                      _firestore.collection("Utils").snapshots(),
+                      builder: (
+                          BuildContext context,
+                          AsyncSnapshot<
+                              QuerySnapshot<Map<String, dynamic>>>
+                          snapshot,
+                          ) {
+                        if (snapshot.hasData) {
+                          final List<dynamic> _productGroups =
+                          snapshot.data!.docs[0].data()['List']
+                          as List<dynamic>;
+                          _productGroups.sort();
+                          return  GridView.builder(
+                              gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                              ),
+                              itemCount: _productGroups.length,
+                              itemBuilder: (context, index) {
+                                return ProductGroupCard(
+                                  name: _productGroups[index] as String,
+                                  key: UniqueKey(),
+                                );
+                              },
                             );
-                          },
-                        );
-                      } else {
-                        return const Center(
-                          child: SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: CircularProgressIndicator(
-                              color: ColorPalette.pacificBlue,
+
+                        } else {
+                          return const Center(
+                            child: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: CircularProgressIndicator(
+                                color: ColorPalette.pacificBlue,
+                              ),
                             ),
-                          ),
-                        );
-                      }
-                    },
+                          );
+                        }
+                      },
+                    ),
                   ),
-                )
-              ],
+          )
+   )],
             ),
           ),
         ),

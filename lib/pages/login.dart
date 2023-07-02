@@ -241,7 +241,7 @@ class LoginPage extends StatelessWidget {
               return admin();
             }));
       }
-
+else
       if (firebaseUser != null) {
         Navigator.push(
             context,
