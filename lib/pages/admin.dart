@@ -48,7 +48,102 @@ class _adminState extends State<admin> {
             width: double.infinity,
             child: Column(
               children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 50,
+                      padding: const EdgeInsets.only(
+                        top: 0,
+                        left: 10,
+                        right: 15,
+                      ),
 
+
+
+                      decoration:  BoxDecoration(
+
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 5),
+                            blurRadius: 6,
+                            color: const Color(0xff000000).withOpacity(0.16),
+                          ),
+                        ],
+                        color:Colors.white70,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(36),
+                          topRight: Radius.circular(36),
+                          bottomLeft: Radius.circular(36),
+                          bottomRight: Radius.circular(36),
+                        ),
+                      ),
+
+                      child: Row(
+
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+
+                        Text("Hotel Management",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: IconButton(
+                              onPressed: () {
+
+
+                                showDialog<void>(
+                                  context: context,
+                                  barrierDismissible: false, // user must tap button!
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Sign Out'),
+                                      backgroundColor: Colors.white,
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Text('Are you certain you want to Sign Out?'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text(
+                                            'Yes',
+                                            style: TextStyle(color: Colors.black),
+                                          ),
+                                          onPressed: () {
+                                            print('yes');
+                                            FirebaseAuth.instance.signOut();
+                                            Navigator.pushNamedAndRemoveUntil(
+                                                context, "/SignIn", (route) => false);
+                                            // Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.logout,
+                                color: Colors.black38,
+                              ),
+                            ),
+                          )
+
+
+                        ],),),
+                  ),
                 Row(
                   children: [
                     Padding(
@@ -262,7 +357,7 @@ class _adminState extends State<admin> {
               borderRadius: const BorderRadius.all(
                   Radius.circular(30))),
           width: MediaQuery.of(context).size.width * 0.96,
-          height: MediaQuery.of(context).size.height * 0.58,
+          height: MediaQuery.of(context).size.height * 0.55,
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: Container(
