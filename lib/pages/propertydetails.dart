@@ -8,20 +8,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/data/data_home.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../MODEL/addedproduct.dart';
 import '../utils/color_palette.dart';
 import '../widget/product_group_card.dart';
-class propertydetails extends StatefulWidget {
-  const propertydetails({Key? key}) : super(key: key);
+class propertydetails extends  StatefulWidget {
+   propertydetails({Key? key,  this.hostelcat}) : super(key: key);
+
+
+   final  String? hostelcat;
 
   @override
-  State<propertydetails> createState() => _propertydetailsState();
+  State<propertydetails> createState() => _propertydetailsState(hostelcat);
 }
 
 class _propertydetailsState extends State<propertydetails> {
+
+ final  String? hostelcat;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  _propertydetailsState( this.hostelcat);
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -35,18 +43,17 @@ height: 566,
             Expanded(
               child: StreamBuilder(
                 stream:
-                _firestore.collection("Utiles").snapshots(),
+                _firestore.collection("Estates").where("group" ,isEqualTo:hostelcat ).snapshots(),
                 builder: (
                     BuildContext context,
-                    AsyncSnapshot<
-                        QuerySnapshot<Map<String, dynamic>>>
+                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                     snapshot,
                     ) {
                   if (snapshot.hasData) {
-                    final List<dynamic> _productGroups =
-                    snapshot.data!.docs[0].data()['List']
-                    as List<dynamic>;
-                    _productGroups.sort();
+                    // final List<dynamic> _productGroups =
+                    // snapshot.data!.docs[0].data()['List']
+                    // as List<dynamic>;
+                    // _productGroups.sort();
                     return GridView.builder(
                       gridDelegate:
                       const SliverGridDelegateWithFixedCrossAxisCount(
@@ -55,10 +62,11 @@ height: 566,
                         crossAxisSpacing: 30,
                         mainAxisSpacing: 20,
                       ),
-                      itemCount: _productGroups.length,
+                      itemCount: snapshot.data?.docs.length,
                       itemBuilder: (context, index) {
+                        var data = snapshot.data!.docs;
                         return ProductGroupCard(
-                          name: _productGroups[index] as String,
+                          name: data[index]['name'],
                           key: UniqueKey(),
                         );
                       },

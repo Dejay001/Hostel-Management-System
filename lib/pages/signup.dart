@@ -20,6 +20,8 @@ class Signup extends StatelessWidget {
 
   // text editing controllers
   final emailController = TextEditingController();
+  final phonecontroller = TextEditingController();
+
   final passwordController = TextEditingController();
 
   double _sigmaX = 5; // from 0-10
@@ -75,13 +77,13 @@ class Signup extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     },
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.26),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.023),
                   const Text("Sign Up",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.001),
                   ClipRect(
                     child: BackdropFilter(
                       filter:
@@ -94,7 +96,7 @@ class Signup extends StatelessWidget {
                             borderRadius:
                             const BorderRadius.all(Radius.circular(30))),
                         width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.49,
+                        height: MediaQuery.of(context).size.height * 0.56,
                         child: Form(
                           key: _formKey,
                           child: Center(
@@ -133,6 +135,11 @@ class Signup extends StatelessWidget {
                                   obscureText: true,
                                 ),
                                 const SizedBox(height: 30),
+                                MyTextField(
+                                  controller: phonecontroller,
+                                  hintText: 'Phone',
+                                  obscureText: false,
+                                ),
 
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -240,13 +247,12 @@ class Signup extends StatelessWidget {
       //save use into to database
 
       Map userDataMap = {
-        // "time":time,
-        // "firstName": fname.text.trim(),
-        // "lastName": lname.text.trim(),
-        "email": emailController.text.trim(),
+
+        "email": emailController.text.trim().toString(),
+        "phone": phonecontroller.text.trim().toString(),
         // "fullName":fname.text.trim() + lname.text.trim(),
         // "phone": phone.text.trim(),
-        "Password": passwordController.text.trim(),
+        "Password": passwordController.text.trim().toString(),
         // "Dob":birthDate,
         // "Gender":Gender,
       };
@@ -278,8 +284,9 @@ class Signup extends StatelessWidget {
       FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
         // 'MobileNumber': _mobileNumber.toString().trim(),
         // 'fullName':_firstName! +  _lastname!,
-        'Email': emailController.toString().trim(),
-        'Password': passwordController.toString().trim(),
+        'Email': emailController.text.toString().trim(),
+        'Password': passwordController.text.toString().trim(),
+        'Phone': phonecontroller.text.toString().trim(),
         // 'Gender': Gender,
         // 'Date Of Birth': birthDate,
       });

@@ -21,6 +21,7 @@ void main() async {
 }
 
 DatabaseReference Hos = FirebaseDatabase.instance.ref().child("Hotels");
+DatabaseReference users = FirebaseDatabase.instance.ref().child("Users");
 DatabaseReference EstateList = FirebaseDatabase.instance.ref().child("Hotels");
 
 class MyApp extends StatelessWidget {
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
             home: LoginPage(),
             initialRoute: FirebaseAuth.instance.currentUser == null
                 ? '/SignUP'
-                : '/admin',
+                : '/Homepage',
             routes: {
               "/admin": (context) => admin(),
               "/SignUP": (context) => Signup(),

@@ -31,7 +31,37 @@ class MyTextField extends StatelessWidget {
     );
   }
 }
+class MyPhoneField extends StatelessWidget {
+  final controller;
+  final String hintText;
+  final bool obscureText;
+  const MyPhoneField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.obscureText,
+  });
 
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: (val) => val!.isEmpty ? '' : null,
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
+          ),
+          fillColor: Colors.grey.shade200,
+          filled: true,
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.grey[500])),
+    );
+  }
+}
 class MyPasswordTextField extends StatelessWidget {
   final controller;
   final String hintText;
@@ -46,7 +76,7 @@ class MyPasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (val) => val!.isEmpty ? 'Veuillez remplir ce champ svp' : null,
+      validator: (val) => val!.isEmpty ? '' : null,
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(

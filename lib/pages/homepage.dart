@@ -58,7 +58,7 @@ class _homepageState extends State<homepage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Antoh",
+                        "Hostels",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 25),
                       ),
@@ -316,7 +316,8 @@ class CategoryWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => propertydetails()));
+                MaterialPageRoute(builder: (context) =>
+                    propertydetails( hostelcat:category.name )));
           },
           child: Padding(
             padding: EdgeInsets.only(right: 10),
