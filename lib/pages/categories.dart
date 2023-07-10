@@ -18,7 +18,7 @@ class Categories extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(22, 45, 0, 10),
                 child: Text(
-                  'Categories',
+                  'Schools',
                   style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold),
                 ),
               )
@@ -119,67 +119,67 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 topRight: Radius.circular(25.0)),
             color: Colors.white),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          InkWell(
-            onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => homepage(),
-                ),
-              ),
-            },
-            child: Column(
-              children: [
-                Icon(Icons.home,
-                    color:
-                        _selectedIndex == 3 ? selectedColor : unSelectedColor),
-                Text("Home",
-                    style: TextStyle(
-                        color: _selectedIndex == 3
-                            ? selectedColor
-                            : unSelectedColor))
-              ],
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Search(),
-                ),
-              );
-            },
-            child: Column(
-              children: [
-                Icon(Icons.search,
-                    color:
-                        _selectedIndex == 1 ? selectedColor : unSelectedColor),
-                Text("Search",
-                    style: TextStyle(
-                        color: _selectedIndex == 1
-                            ? selectedColor
-                            : unSelectedColor))
-              ],
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              _showBottomSheet();
-            },
-            child: Column(
-              children: [
-                Icon(Icons.favorite_border,
-                    color:
-                        _selectedIndex == 2 ? selectedColor : unSelectedColor),
-                Text("Saved",
-                    style: TextStyle(
-                        color: _selectedIndex == 2
-                            ? selectedColor
-                            : unSelectedColor))
-              ],
-            ),
-          ),
+          // InkWell(
+          //   onTap: () => {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => homepage(),
+          //       ),
+          //     ),
+          //   },
+          //   child: Column(
+          //     children: [
+          //       Icon(Icons.home,
+          //           color:
+          //               _selectedIndex == 3 ? selectedColor : unSelectedColor),
+          //       Text("Home",
+          //           style: TextStyle(
+          //               color: _selectedIndex == 3
+          //                   ? selectedColor
+          //                   : unSelectedColor))
+          //     ],
+          //   ),
+          // ),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => Search(),
+          //       ),
+          //     );
+          //   },
+          //   child: Column(
+          //     children: [
+          //       Icon(Icons.search,
+          //           color:
+          //               _selectedIndex == 1 ? selectedColor : unSelectedColor),
+          //       Text("Search",
+          //           style: TextStyle(
+          //               color: _selectedIndex == 1
+          //                   ? selectedColor
+          //                   : unSelectedColor))
+          //     ],
+          //   ),
+          // ),
+          // InkWell(
+          //   onTap: () {
+          //     _showBottomSheet();
+          //   },
+          //   child: Column(
+          //     children: [
+          //       Icon(Icons.favorite_border,
+          //           color:
+          //               _selectedIndex == 2 ? selectedColor : unSelectedColor),
+          //       Text("Saved",
+          //           style: TextStyle(
+          //               color: _selectedIndex == 2
+          //                   ? selectedColor
+          //                   : unSelectedColor))
+          //     ],
+          //   ),
+          // ),
           InkWell(
             onTap: () {
               _onTap(0);
@@ -189,7 +189,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                 Icon(Icons.category_outlined,
                     color:
                         _selectedIndex == 0 ? selectedColor : unSelectedColor),
-                Text("Category",
+                Text("Schools",
                     style: TextStyle(
                         color: _selectedIndex == 0
                             ? selectedColor

@@ -31,7 +31,7 @@ class ProductGroupCard extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white70,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 offset: const Offset(0, 5),

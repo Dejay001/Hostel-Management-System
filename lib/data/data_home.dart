@@ -6,11 +6,11 @@ class Category {
 }
 
 List<Category> categoryList = [
-  Category("Residential","assets/images/Residential.jpg"),
-  Category("Standard","assets/images/commercial.jpg"),
-  Category("Agricultural", "assets/images/land.jpg"),
-  Category("Mixed-Use", "assets/images/mixeduse.jpg"),
-  Category("Special Purpose", "assets/images/specialpurpose.jpg"),
+  Category("GCTU","assets/images/Residential.jpg"),
+  Category("UG-LEGON","assets/images/commercial.jpg"),
+  Category("UPSA", "assets/images/land.jpg"),
+  Category("CENTRAL", "assets/images/mixeduse.jpg"),
+  // Category("UCC", "assets/images/specialpurpose.jpg"),
 ];
 
 List<String> nearbyList = [

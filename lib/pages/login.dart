@@ -234,7 +234,7 @@ class LoginPage extends StatelessWidget {
           password: passwordController.text);
 
 
-      if(firebaseUser =="daniel@gmail.com"){
+      if(firebaseUser =="enos@gmail.com"){
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {

@@ -67,7 +67,7 @@ class _addproductState extends State<addproduct> {
         title: Row(
           children: [
             const Text(
-              "New Estate",
+              "Add Hostel",
               style: TextStyle(
                 fontFamily: "Nunito",
                 fontSize: 28,
@@ -186,7 +186,7 @@ class _addproductState extends State<addproduct> {
                                                 padding: const EdgeInsets.only(
                                                   left: 8, bottom: 12,),
                                                 child: Text(
-                                                  "Estate Type  : $group",
+                                                  "School Name  : $group",
                                                   style: const TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize: 17,
@@ -231,7 +231,7 @@ class _addproductState extends State<addproduct> {
                                             ),
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: "Estate Name",
+                                              hintText: "Hostel Name",
                                               filled: true,
                                               fillColor: Colors.transparent,
                                               hintStyle: TextStyle(
@@ -353,7 +353,7 @@ class _addproductState extends State<addproduct> {
                                                   ),
                                                   decoration: InputDecoration(
                                                     border: InputBorder.none,
-                                                    hintText: "Room N0.",
+                                                    hintText: "Room Qty",
                                                     filled: true,
                                                     fillColor:
                                                         Colors.transparent,
@@ -372,55 +372,55 @@ class _addproductState extends State<addproduct> {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: ColorPalette.white,
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(0, 3),
-                                                blurRadius: 6,
-                                                color: ColorPalette.nileBlue
-                                                    .withOpacity(0.1),
-                                              ),
-                                            ],
-                                          ),
-                                          height: 50,
-                                          child: TextFormField(
-                                            initialValue:
-                                                newProduct.company ?? '',
-                                            onChanged: (value) {
-                                              newProduct.company = value;
-                                            },
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            key: UniqueKey(),
-                                            keyboardType: TextInputType.text,
-                                            style: const TextStyle(
-                                              fontFamily: "Nunito",
-                                              fontSize: 16,
-                                              color: ColorPalette.nileBlue,
-                                            ),
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Company",
-                                              filled: true,
-                                              fillColor: Colors.transparent,
-                                              hintStyle: TextStyle(
-                                                fontFamily: "Nunito",
-                                                fontSize: 16,
-                                                color: ColorPalette.nileBlue
-                                                    .withOpacity(0.58),
-                                              ),
-                                            ),
-                                            cursorColor:
-                                                ColorPalette.timberGreen,
-                                          ),
-                                        ),
+                                        // const SizedBox(
+                                        //   height: 20,
+                                        // ),
+                                        // Container(
+                                        //   decoration: BoxDecoration(
+                                        //     color: ColorPalette.white,
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(12),
+                                        //     boxShadow: [
+                                        //       BoxShadow(
+                                        //         offset: const Offset(0, 3),
+                                        //         blurRadius: 6,
+                                        //         color: ColorPalette.nileBlue
+                                        //             .withOpacity(0.1),
+                                        //       ),
+                                        //     ],
+                                        //   ),
+                                        //   height: 50,
+                                        //   child: TextFormField(
+                                        //     initialValue:
+                                        //         newProduct.company ?? '',
+                                        //     onChanged: (value) {
+                                        //       newProduct.company = value;
+                                        //     },
+                                        //     textInputAction:
+                                        //         TextInputAction.next,
+                                        //     key: UniqueKey(),
+                                        //     keyboardType: TextInputType.text,
+                                        //     style: const TextStyle(
+                                        //       fontFamily: "Nunito",
+                                        //       fontSize: 16,
+                                        //       color: ColorPalette.nileBlue,
+                                        //     ),
+                                        //     decoration: InputDecoration(
+                                        //       border: InputBorder.none,
+                                        //       hintText: "Company",
+                                        //       filled: true,
+                                        //       fillColor: Colors.transparent,
+                                        //       hintStyle: TextStyle(
+                                        //         fontFamily: "Nunito",
+                                        //         fontSize: 16,
+                                        //         color: ColorPalette.nileBlue
+                                        //             .withOpacity(0.58),
+                                        //       ),
+                                        //     ),
+                                        //     cursorColor:
+                                        //         ColorPalette.timberGreen,
+                                        //   ),
+                                        // ),
                                         const SizedBox(
                                           height: 20,
                                         ),

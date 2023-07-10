@@ -103,7 +103,7 @@ class _homepageState extends State<homepage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Categories",
+                          "Schools",
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 15),
                         ),
@@ -141,138 +141,11 @@ class _homepageState extends State<homepage> {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Nearby",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 15),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Search(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "See All \u203A",
-                            style: TextStyle(color: homepage.themeColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                      itemBuilder: (context, position) {
-                        return NearbyWidget(nearbyList[position]);
-                      },
-                      itemCount: nearbyList.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 190,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: StreamBuilder(
-                        stream: _firestore
-                            .collection("Estates")
-                            .where("group", isEqualTo: name)
-                            .snapshots(),
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                              snapshot,
-                        ) {
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: CircularProgressIndicator(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            );
-                          }
-                          return ListView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return EstateCard(
-                                Product: addedProduct.fromMap(
-                                  snapshot.data!.docs[index].data(),
-                                ),
-                                docID: snapshot.data!.docs[index].id,
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               SizedBox(
                 height: 20,
               ),
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Explore",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 15),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Search(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "See All \u203A",
-                            style: TextStyle(color: homepage.themeColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                      itemBuilder: (context, position) {
-                        return NearbyWidget(exploreList[position]);
-                      },
-                      itemCount: exploreList.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                    ),
-                  ),
-                ],
-              ),
+
               SizedBox(
                 height: 40,
               ),

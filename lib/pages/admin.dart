@@ -144,7 +144,7 @@ class _adminState extends State<admin> {
 
                         ],),),
                   ),
-                Row(
+                Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
@@ -172,10 +172,10 @@ class _adminState extends State<admin> {
                           ],
                           color:Colors.white70,
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(36),
-                            topRight: Radius.circular(36),
-                            bottomLeft: Radius.circular(36),
-                            bottomRight: Radius.circular(36),
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
                           ),
                         ),
 
@@ -212,7 +212,7 @@ class _adminState extends State<admin> {
                                           builder: (context) {
                                             return AlertDialog(
                                               title: const Text(
-                                                "Add Estate Category ",
+                                                "Add School Category ",
                                                 style: TextStyle(fontFamily: "Nunito"),
                                               ),
                                               content: Column(
@@ -243,7 +243,7 @@ class _adminState extends State<admin> {
                                                       ),
                                                       decoration: InputDecoration(
                                                         border: InputBorder.none,
-                                                        hintText: "Add Estate Category",
+                                                        hintText: "Add School Name",
                                                         filled: true,
                                                         fillColor: Colors.transparent,
                                                         hintStyle: TextStyle(
@@ -352,10 +352,10 @@ class _adminState extends State<admin> {
           padding:
           const EdgeInsets.symmetric(horizontal: 0.0),
           decoration: BoxDecoration(
-              color: Color.fromRGBO(3, 0, 0, 1)
-                  .withOpacity(_opacity),
+              // color: Color.fromRGBO(3, 0, 0, 1)
+              //     .withOpacity(_opacity),
               borderRadius: const BorderRadius.all(
-                  Radius.circular(30))),
+                  Radius.circular(2))),
           width: MediaQuery.of(context).size.width * 0.96,
           height: MediaQuery.of(context).size.height * 0.55,
           child: Padding(

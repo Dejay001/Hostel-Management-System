@@ -34,7 +34,7 @@ class _propertydetailsState extends State<propertydetails> {
   Widget build(BuildContext context) {
     return  Scaffold(
 appBar: AppBar(
-title: Text("PROPERTY DETAILS",style: TextStyle(color: Colors.white),),
+title: Text("Hostels",style: TextStyle(color: Colors.white),),
 ),
       body: Container(
 height: 566,

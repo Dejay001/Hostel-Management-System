@@ -37,7 +37,7 @@ class ProductDetailsPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
           splashColor: ColorPalette.bondyBlue,
-          backgroundColor: ColorPalette.pacificBlue,
+          backgroundColor: Colors.black,
           child: const Icon(
             Icons.done,
             color: ColorPalette.white,
@@ -62,7 +62,7 @@ class ProductDetailsPage extends StatelessWidget {
                   width: double.infinity,
                   height: 90,
                   decoration: const BoxDecoration(
-                    color: ColorPalette.pacificBlue,
+                    color: Colors.black,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(16),
                       bottomRight: Radius.circular(16),
@@ -78,17 +78,18 @@ class ProductDetailsPage extends StatelessWidget {
                             icon: const Icon(
                               Icons.chevron_left_rounded,
                               size: 35,
+                              color: Colors.white70
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
                           ),
                           const Text(
-                            "Edit Product",
+                            "Edit Hostel Details",
                             style: TextStyle(
                               fontFamily: "Nunito",
                               fontSize: 28,
-                              color: ColorPalette.timberGreen,
+                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -157,7 +158,7 @@ class ProductDetailsPage extends StatelessWidget {
                                             bottom: 12,
                                           ),
                                           child: Text(
-                                            "Product Group : ${product!.group}",
+                                            "School Name: ${product!.group}",
                                             style: const TextStyle(
                                               fontFamily: "Nunito",
                                               fontSize: 17,
@@ -196,7 +197,7 @@ class ProductDetailsPage extends StatelessWidget {
                                             ),
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              hintText: "Product Name",
+                                              hintText: "Hostel Name",
                                               filled: true,
                                               fillColor: Colors.transparent,
                                               hintStyle: TextStyle(
@@ -316,7 +317,7 @@ class ProductDetailsPage extends StatelessWidget {
                                                   ),
                                                   decoration: InputDecoration(
                                                     border: InputBorder.none,
-                                                    hintText: "Quantity",
+                                                    hintText: "Room Qty",
                                                     filled: true,
                                                     fillColor:
                                                         Colors.transparent,
@@ -335,54 +336,7 @@ class ProductDetailsPage extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: ColorPalette.white,
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(0, 3),
-                                                blurRadius: 6,
-                                                color: ColorPalette.nileBlue
-                                                    .withOpacity(0.1),
-                                              ),
-                                            ],
-                                          ),
-                                          height: 50,
-                                          child: TextFormField(
-                                            initialValue: product!.company ?? '',
-                                            onChanged: (value) {
-                                              product!.company = value;
-                                            },
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            key: UniqueKey(),
-                                            keyboardType: TextInputType.text,
-                                            style: const TextStyle(
-                                              fontFamily: "Nunito",
-                                              fontSize: 16,
-                                              color: ColorPalette.nileBlue,
-                                            ),
-                                            decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Company",
-                                              filled: true,
-                                              fillColor: Colors.transparent,
-                                              hintStyle: TextStyle(
-                                                fontFamily: "Nunito",
-                                                fontSize: 16,
-                                                color: ColorPalette.nileBlue
-                                                    .withOpacity(0.58),
-                                              ),
-                                            ),
-                                            cursorColor:
-                                                ColorPalette.timberGreen,
-                                          ),
-                                        ),
+
                                         const SizedBox(
                                           height: 20,
                                         ),
@@ -448,7 +402,68 @@ class ProductDetailsPage extends StatelessWidget {
                                           ),
                                         ),
                                       //  LocationDD(product: product),
-                                      ],
+                              const SizedBox(height: 20),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: 8,
+                                  bottom: 5,
+                                ),
+                                child: Column(
+                                  children: [
+
+
+                                    Container(
+
+
+                                      decoration: BoxDecoration(
+                                        color: ColorPalette.white,
+                                        borderRadius:
+                                        BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: const Offset(0, 3),
+                                            blurRadius: 6,
+                                            color: ColorPalette.nileBlue
+                                                .withOpacity(0.1),
+                                          ),
+                                        ],
+                                      ),
+                                      height: 50,
+                                      child: TextFormField(
+                                        initialValue:
+                                        product?.location ?? '',
+                                        onChanged: (value) {
+                                          product?.location = value;
+                                        },
+                                        textInputAction:
+                                        TextInputAction.next,
+                                        key: UniqueKey(),
+                                        keyboardType: TextInputType.text,
+                                        style: const TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 16,
+                                          color: ColorPalette.nileBlue,
+                                        ),
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Location/Digital Address",
+                                          filled: true,
+                                          fillColor: Colors.transparent,
+                                          hintStyle: TextStyle(
+                                            fontFamily: "Nunito",
+                                            fontSize: 16,
+                                            color: ColorPalette.nileBlue
+                                                .withOpacity(0.58),
+                                          ),
+                                        ),
+                                        cursorColor:
+                                        ColorPalette.timberGreen,
+                                      ),
+                                    ),
+                                  ],
+                                )
+
+                              )],
                                     ),
                                   ),
                                 ),

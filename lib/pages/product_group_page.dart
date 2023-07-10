@@ -147,6 +147,14 @@ class ProductGroupPage extends StatelessWidget {
                               fontFamily: "Nunito",
                             ),
                           ),
+                           Text(
+                            "${name}",
+                            style: TextStyle(
+                              color: ColorPalette.timberGreen,
+                              fontSize: 20,
+                              fontFamily: "Nunito",
+                            ),
+                          ),
                           const SizedBox(height: 20),
                           Expanded(
                             child: StreamBuilder(
