@@ -52,14 +52,14 @@ class CategorysWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
           child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 120,
+              width: MediaQuery.of(context).size.width*0.04,
+              height: 190,
               decoration: BoxDecoration(
                 color: Colors.black,
                 image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   image: AssetImage(category.image),
-                  opacity: 0.85
+                  opacity: 0.25
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
                 boxShadow: [
@@ -79,7 +79,7 @@ class CategorysWidget extends StatelessWidget {
             category.name,
             style: const TextStyle(
               fontSize: 30,
-              color: Colors.white,
+              color: Colors.black,
               decoration: TextDecoration.none,
             ),
           ),

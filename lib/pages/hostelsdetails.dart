@@ -53,11 +53,12 @@ class _hosteldetailsState extends State<hosteldetails> {
               },
             ),
             TextButton(
-              child: Text('Call'),
+              child: Text('Cancel'),
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
-                makeCall(document);
-              },
+                //   makeCall(document);
+                // },
+              }
             ),
           ],
         );

@@ -127,14 +127,19 @@ class _homepageState extends State<homepage> {
                   ),
                   SizedBox(height: 10),
                   SizedBox(
-                    height: 120,
-                    child: ListView.builder(
+                    height: 400,
+                    child: GridView.builder(
                       itemBuilder: (context, position) {
                         return CategoryWidget(categoryList[position]);
                       },
                       itemCount: categoryList.length,
                       scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
+                      physics: BouncingScrollPhysics(), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,//Adjust the aspect ratio as per your needs
+                    ),
                     ),
                   ),
                 ],
@@ -143,9 +148,7 @@ class _homepageState extends State<homepage> {
                 height: 20,
               ),
 
-              SizedBox(
-                height: 20,
-              ),
+
 
               SizedBox(
                 height: 40,
@@ -196,8 +199,8 @@ class CategoryWidget extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(right: 10),
             child: Container(
-                width: 100.0,
-                height: 120.0,
+                width: 180.0,
+                height: 210.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover, image: AssetImage(category.image)),
@@ -211,7 +214,7 @@ class CategoryWidget extends StatelessWidget {
           child: Text(
             category.name,
             style: TextStyle(
-                fontWeight: FontWeight.w500, fontSize: 12, color: Colors.white),
+                fontWeight: FontWeight.w500, fontSize: 12, color: Colors.black),
           ),
         ),
       ],

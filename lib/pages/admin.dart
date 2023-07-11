@@ -379,8 +379,8 @@ class _adminState extends State<admin> {
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 1,
-                                crossAxisSpacing: 10,
+                                childAspectRatio: 2,
+                                crossAxisSpacing: 6,
                                 mainAxisSpacing: 10,
                               ),
                               itemCount: _productGroups.length,

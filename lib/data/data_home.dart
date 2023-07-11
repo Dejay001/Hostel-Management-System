@@ -6,10 +6,10 @@ class Category {
 }
 
 List<Category> categoryList = [
-  Category("GCTU","assets/images/Residential.jpg"),
-  Category("UG-LEGON","assets/images/commercial.jpg"),
-  Category("UPSA", "assets/images/land.jpg"),
-  Category("CENTRAL", "assets/images/mixeduse.jpg"),
+  Category("GCTU","assets/images/gctu.png"),
+  Category("UG-LEGON","assets/images/ug.png"),
+  Category("UPSA", "assets/images/UPSA.png"),
+  Category("CENTRAL", "assets/images/central.png"),
   // Category("UCC", "assets/images/specialpurpose.jpg"),
 ];
 
