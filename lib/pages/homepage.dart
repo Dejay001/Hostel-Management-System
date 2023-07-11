@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/addedproduct.dart';
 import 'package:hostelmanagement/data/data_home.dart';
 import 'package:hostelmanagement/pages/categories.dart';
+import 'package:hostelmanagement/pages/hostelsdetails.dart';
 import 'package:hostelmanagement/pages/login.dart';
 import 'package:hostelmanagement/pages/propertydetails.dart';
 import 'package:hostelmanagement/pages/search.dart';
@@ -190,7 +191,7 @@ class CategoryWidget extends StatelessWidget {
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
-                    propertydetails( hostelcat:category.name )));
+                    hosteldetails(hostelcat:category.name )));
           },
           child: Padding(
             padding: EdgeInsets.only(right: 10),

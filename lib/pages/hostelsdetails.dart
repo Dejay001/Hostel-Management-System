@@ -1,194 +1,201 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/addedproduct.dart';
 import 'package:hostelmanagement/pages/product_details_page.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
 
-class hosteldetails extends StatelessWidget {
-  const hosteldetails({Key? key, this.Product, this.docID}) : super(key: key);
-  final addedProduct? Product;
-  final String? docID;
+
+class hosteldetails extends StatefulWidget {
+
+  final String hostelcat;
+
+  hosteldetails({required this.hostelcat});
+
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ProductDetailsPage(
-              docID: docID,
-              product: Product,
+  _hosteldetailsState createState() => _hosteldetailsState();
+}
+
+class _hosteldetailsState extends State<hosteldetails> {
+   QuerySnapshot? hostelDetailsSnapshot;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchHostelDetails();
+  }
+
+  Future<void> fetchHostelDetails() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Estates')
+        .where('group', isEqualTo: widget.hostelcat)
+        .get();
+
+    setState(() {
+      hostelDetailsSnapshot = snapshot;
+    });
+  }
+
+  void showBookingDialog(DocumentSnapshot document) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Choose an action'),
+          content: Text('Do you want to book or call?'),
+          actions: [
+            TextButton(
+              child: Text('Book'),
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+                bookHostel(document.id);
+              },
             ),
-          ),
+            TextButton(
+              child: Text('Call'),
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+                makeCall(document);
+              },
+            ),
+          ],
         );
       },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: 147,
-        decoration: BoxDecoration(
-          color: ColorPalette.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 5),
-              blurRadius: 6,
-              color: const Color(0xff000000).withOpacity(0.06),
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            SizedBox(
-              height: 87,
-              width: 87,
-              child: (Product!.image == null)
-                  ? Center(
-                child: Icon(
-                  Icons.image,
-                  color: ColorPalette.nileBlue.withOpacity(0.5),
-                ),
-              )
-                  : ClipRRect(
-                borderRadius: BorderRadius.circular(11),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: Product!.image!,
-                  errorWidget: (context, s, a) {
-                    return Icon(
-                      Icons.image,
-                      color: ColorPalette.nileBlue.withOpacity(0.5),
-                    );
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Product!.name ?? '',
-                    maxLines: 1,
-                    style: const TextStyle(
-                      fontFamily: "Nunito",
-                      fontSize: 20,
-                      color: ColorPalette.timberGreen,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        size: 14,
-                        color: ColorPalette.timberGreen.withOpacity(0.44),
-                      ),
-                      Text(
-                        Product!.location ?? '-',
-                        maxLines: 1,
-                        style: const TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 12,
-                          color: ColorPalette.timberGreen,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        Product!.group ?? '-',
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 12,
-                          color: ColorPalette.timberGreen.withOpacity(0.44),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 5,
-                          top: 2,
-                          right: 5,
-                        ),
-                        child: Icon(
-                          Icons.circle,
-                          size: 5,
-                          color: ColorPalette.timberGreen.withOpacity(0.44),
-                        ),
-                      ),
-                      Text(
-                        Product!.company ?? '-',
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 12,
-                          color: ColorPalette.timberGreen.withOpacity(0.44),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    // width: 100,
-                    child: Text(
-                      Product!.description ?? '-',
-                      maxLines: 3,
-                      style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 11,
-                        color: ColorPalette.timberGreen.withOpacity(0.35),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "GHC${Product!.cost ?? '-'}",
-                    style: const TextStyle(
-                      fontFamily: "Nunito",
-                      fontSize: 14,
-                      color: ColorPalette.nileBlue,
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "${Product!.quantity ?? '-'}\nRooms Available",
-                        style: const TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 12,
-                          color: ColorPalette.nileBlue,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    ); ;
+    );
   }
+
+  void bookHostel(String documentId) {
+    // Perform the booking process and store booking details in Firestore
+    // using the same document ID as a booking
+    // Replace the following code with your own implementation
+    // Example code to update the booking details
+    FirebaseFirestore.instance.collection('bookings').doc(documentId).set({
+      'user': 'John Doe',
+      'date': DateTime.now(),
+      // Add more booking details as per your requirements
+    });
+  }
+
+  void makeCall(DocumentSnapshot document) {
+    // Perform call functionality using the provided document
+    // Replace the following code with your own implementation
+    String phoneNumber = document['phone'];
+    // Use a phone calling library or platform-specific functionality
+    // to make the call with the given phone number
+    print('Making call to: $phoneNumber');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+   if (hostelDetailsSnapshot == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+   return Scaffold(
+
+    body: Column(
+      children:[
+
+
+        Padding(
+          padding: const EdgeInsets.only(top:28.0),
+          child: Container(
+            height: 50,
+            padding: const EdgeInsets.only(
+              top: 0,
+              left: 10,
+              right: 15,
+            ),
+
+
+
+            decoration:  BoxDecoration(
+
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 5),
+                  blurRadius: 6,
+                  color: const Color(0xff000000).withOpacity(0.16),
+                ),
+              ],
+              color:Colors.white70,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(36),
+                topRight: Radius.circular(36),
+                bottomLeft: Radius.circular(36),
+                bottomRight: Radius.circular(36),
+              ),
+            ),
+
+            child: Row(
+
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+
+
+                Text("Hostels",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+
+
+
+
+              ],),),
+        ),
+        Container(
+
+          height: 399,
+
+          child:
+        ListView.builder(
+        itemCount: hostelDetailsSnapshot!.docs.length,
+        itemBuilder: (BuildContext context, int index) {
+          DocumentSnapshot document = hostelDetailsSnapshot!.docs[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              height: 127,
+              decoration: BoxDecoration(
+                color: ColorPalette.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(0, 5),
+                    blurRadius: 6,
+                    color: const Color(0xff000000).withOpacity(0.06),
+                  ),
+                ],
+              ),
+              child: ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.only(top:1.0),
+                  child: SizedBox(
+                    height: 87,
+                    width: 57,
+                    child: CachedNetworkImage(
+                        fit: BoxFit.fill, imageUrl: document['image'],),
+                  ),
+                ),
+                title: Padding(
+                  padding: const EdgeInsets.only(top:28.0),
+                  child: Text(document['name']),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Cost: \GHS ${document['Cost']}'),
+                    Text('Available Rooms: ${document['quantity']}'),
+                  ],
+                ),
+                onTap: () {
+                  showBookingDialog(document);
+                },
+              ),
+            ),
+          );
+        },
+      ),
+        )]));
+  }
+
 }
