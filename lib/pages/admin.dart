@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/addedproduct.dart';
 import 'package:hostelmanagement/pages//registration_screen.dart';
+import 'package:hostelmanagement/pages/bookedhostels.dart';
 import 'package:hostelmanagement/pages/homepage.dart';
 import 'package:hostelmanagement/pages/hostelsdetails.dart';
 import 'package:hostelmanagement/pages/signup.dart';

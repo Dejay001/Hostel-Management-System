@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class bookedhostels extends StatefulWidget {
    bookedhostels({Key? key}) : super(key: key);
@@ -10,6 +11,12 @@ class bookedhostels extends StatefulWidget {
 class _bookedhostelsState extends State<bookedhostels> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return  Scaffold(
+      body: Column(
+        children: [
+
+        ],
+      ),
+    );
   }
 }

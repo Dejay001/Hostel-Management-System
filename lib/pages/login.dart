@@ -252,19 +252,19 @@ class LoginPage extends StatelessWidget {
 
       const String adminEmail = 'admin@gmail.com';
       if(emailController.text==adminEmail){
-        Navigator.push(
+
+        Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) {
-              return admin();
-            }));
+            MaterialPageRoute(
+                builder: (context) => admin()));
+
       }
 else
       if (firebaseUser != null) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) {
-              return homepage();
-            }));
+            MaterialPageRoute(
+                builder: (context) => admin()));
         displayToast("Logged-in ", context);
       } else {
         displayToast("Error: Cannot be signed in", context);
