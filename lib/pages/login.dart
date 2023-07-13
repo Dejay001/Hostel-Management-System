@@ -55,13 +55,13 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+                  // IconButton(
+                  //   icon: const Icon(Icons.arrow_back_ios),
+                  //   color: Colors.white,
+                  //   onPressed: () {
+                  //     Navigator.pop(context);
+                  //   },
+                  // ),
                   // GestureDetector(
                   //   onTap: (){
                   //
