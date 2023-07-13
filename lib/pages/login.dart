@@ -62,24 +62,24 @@ class LoginPage extends StatelessWidget {
                       Navigator.pop(context);
                     },
                   ),
-                  GestureDetector(
-                    onTap: (){
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  admin()));
-                    },
-                    child: const Text(
-                      'Admin',
-                      style: TextStyle(
-                          color: Color.fromARGB(
-                              255, 71, 233, 133),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: (){
+                  //
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) =>
+                  //                 admin()));
+                  //   },
+                  //   child: const Text(
+                  //     'Admin',
+                  //     style: TextStyle(
+                  //         color: Color.fromARGB(
+                  //             255, 71, 233, 133),
+                  //         fontWeight: FontWeight.bold,
+                  //         fontSize: 20),
+                  //   ),
+                  // ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                   const Text("Log in",
                       style: TextStyle(
@@ -250,8 +250,8 @@ class LoginPage extends StatelessWidget {
           email: emailController.text,
           password: passwordController.text);
 
-
-      if(emailController =="admin@gmail.com"){
+      const String adminEmail = 'admin@gmail.com';
+      if(emailController.text==adminEmail){
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
