@@ -140,7 +140,7 @@ class ProductGroupPage extends StatelessWidget {
                             ],
                           ),
                           const Text(
-                            "Estates",
+                            "Hostels",
                             style: TextStyle(
                               color: ColorPalette.timberGreen,
                               fontSize: 20,
