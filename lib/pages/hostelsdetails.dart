@@ -95,108 +95,110 @@ class _hosteldetailsState extends State<hosteldetails> {
     }
    return Scaffold(
 
-    body: Column(
-      children:[
+    body: SingleChildScrollView(
+      child: Column(
+        children:[
 
 
-        Padding(
-          padding: const EdgeInsets.only(top:28.0),
-          child: Container(
-            height: 50,
-            padding: const EdgeInsets.only(
-              top: 0,
-              left: 10,
-              right: 15,
-            ),
-
-
-
-            decoration:  BoxDecoration(
-
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 5),
-                  blurRadius: 6,
-                  color: const Color(0xff000000).withOpacity(0.16),
-                ),
-              ],
-              color:Colors.white70,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(36),
-                topRight: Radius.circular(36),
-                bottomLeft: Radius.circular(36),
-                bottomRight: Radius.circular(36),
-              ),
-            ),
-
-            child: Row(
-
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-
-
-                Text("Hostels",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
-
-
-
-
-              ],),),
-        ),
-        Container(
-
-          height: 399,
-
-          child:
-        ListView.builder(
-        itemCount: hostelDetailsSnapshot!.docs.length,
-        itemBuilder: (BuildContext context, int index) {
-          DocumentSnapshot document = hostelDetailsSnapshot!.docs[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.only(top:28.0),
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              height: 127,
-              decoration: BoxDecoration(
-                color: ColorPalette.white,
-                borderRadius: BorderRadius.circular(16),
+              height: 51,
+              padding: const EdgeInsets.only(
+                top: 0,
+                left: 10,
+                right: 15,
+              ),
+
+
+
+              decoration:  BoxDecoration(
+
                 boxShadow: [
                   BoxShadow(
                     offset: const Offset(0, 5),
                     blurRadius: 6,
-                    color: const Color(0xff000000).withOpacity(0.06),
+                    color: const Color(0xff000000).withOpacity(0.16),
                   ),
                 ],
+                color:Colors.white70,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(36),
+                  topRight: Radius.circular(36),
+                  bottomLeft: Radius.circular(36),
+                  bottomRight: Radius.circular(36),
+                ),
               ),
-              child: ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.only(top:1.0),
-                  child: SizedBox(
-                    height: 87,
-                    width: 57,
-                    child: CachedNetworkImage(
-                        fit: BoxFit.fill, imageUrl: document['image'],),
-                  ),
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.only(top:28.0),
-                  child: Text(document['name']),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Cost: \GHS ${document['Cost']}'),
-                    Text('Available Rooms: ${document['quantity']}'),
+
+              child: Row(
+
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+
+
+                  Text("Hostels",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 21),),
+
+
+
+
+                ],),),
+          ),
+          Container(
+//willdo mediaq
+            height: MediaQuery.of(context).size.height ,
+
+            child:
+          ListView.builder(
+          itemCount: hostelDetailsSnapshot!.docs.length,
+          itemBuilder: (BuildContext context, int index) {
+            DocumentSnapshot document = hostelDetailsSnapshot!.docs[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                height: 127,
+                decoration: BoxDecoration(
+                  color: ColorPalette.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 5),
+                      blurRadius: 6,
+                      color: const Color(0xff000000).withOpacity(0.06),
+                    ),
                   ],
                 ),
-                onTap: () {
-                  showBookingDialog(document);
-                },
+                child: ListTile(
+                  leading: Padding(
+                    padding: const EdgeInsets.only(top:1.0),
+                    child: SizedBox(
+                      height: 87,
+                      width: 57,
+                      child: CachedNetworkImage(
+                          fit: BoxFit.fill, imageUrl: document['image'],),
+                    ),
+                  ),
+                  title: Padding(
+                    padding: const EdgeInsets.only(top:28.0),
+                    child: Text(document['name']),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Cost: \GHS ${document['Cost']}'),
+                      Text('Available Rooms: ${document['quantity']}'),
+                    ],
+                  ),
+                  onTap: () {
+                    showBookingDialog(document);
+                  },
+                ),
               ),
-            ),
-          );
-        },
-      ),
-        )]));
+            );
+          },
+        ),
+          )]),
+    ));
   }
 
 }
