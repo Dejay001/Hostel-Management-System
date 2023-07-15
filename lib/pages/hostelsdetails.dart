@@ -72,8 +72,9 @@ class _hosteldetailsState extends State<hosteldetails> {
     // Replace the following code with your own implementation
     // Example code to update the booking details
     FirebaseFirestore.instance.collection('bookings').doc(documentId).set({
-      'user': 'John Doe',
+      'user':documentId ,
       'date': DateTime.now(),
+      'Appartment':documentId,
       // Add more booking details as per your requirements
     });
   }
