@@ -2,9 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/MODEL/addedproduct.dart';
+import 'package:hostelmanagement/MODEL/assistantmethods.dart';
 import 'package:hostelmanagement/pages/product_details_page.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
+import 'package:provider/provider.dart';
 
 
 class hosteldetails extends StatefulWidget {
@@ -24,6 +27,7 @@ class _hosteldetailsState extends State<hosteldetails> {
   void initState() {
     super.initState();
     fetchHostelDetails();
+    AssistantMethods.getCurrentOnlineUserInfo(context);
   }
 
   Future<void> fetchHostelDetails() async {
@@ -71,9 +75,9 @@ class _hosteldetailsState extends State<hosteldetails> {
     // using the same document ID as a booking
     // Replace the following code with your own implementation
     // Example code to update the booking details
-    FirebaseFirestore.instance.collection('bookings').doc(documentId).set({
-      'user':documentId ,
-      'date': DateTime.now(),
+    FirebaseFirestore.instance.collection('Estates').doc(documentId).update({
+      'email':  Provider.of<Users>(context, listen: false).userInfo!.email! ,
+    'date': DateTime.now(),
       'Appartment':documentId,
       // Add more booking details as per your requirements
     });
