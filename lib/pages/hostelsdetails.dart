@@ -14,6 +14,7 @@ class hosteldetails extends StatefulWidget {
 
   final String hostelcat;
 
+
   hosteldetails({required this.hostelcat});
 
   @override
@@ -22,7 +23,9 @@ class hosteldetails extends StatefulWidget {
 
 class _hosteldetailsState extends State<hosteldetails> {
    QuerySnapshot? hostelDetailsSnapshot;
-
+// text editing controllers
+  final numbrooms = TextEditingController();
+  final emailController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -47,7 +50,18 @@ class _hosteldetailsState extends State<hosteldetails> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Choose an action'),
-          content: Text('Do you want to book or call?'),
+          content: Container(
+            height: 388,
+            child:Column(
+            children: [
+              Text('Do you want to book or call?'),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(controller: numbrooms,),
+              )
+            ],
+          )),
           actions: [
             TextButton(
               child: Text('Book'),
@@ -71,12 +85,15 @@ class _hosteldetailsState extends State<hosteldetails> {
   }
 
   void bookHostel(String documentId) {
-    // Perform the booking process and store booking details in Firestore
+    // var newquantity==documentId.    // Perform the booking process and store booking details in Firestore
     // using the same document ID as a booking
     // Replace the following code with your own implementation
     // Example code to update the booking details
     FirebaseFirestore.instance.collection('Estates').doc(documentId).update({
       'email':  Provider.of<Users>(context, listen: false).userInfo!.email! ,
+      "booked room":numbrooms.text.toString(),
+      // "quantity":documentId["quanti]-numbrooms
+
     'date': DateTime.now(),
       'Appartment':documentId,
       // Add more booking details as per your requirements

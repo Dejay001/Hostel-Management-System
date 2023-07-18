@@ -16,7 +16,7 @@ class AssistantMethods{
         firebaseUser!.uid; // ASSIGN UID FROM FIREBASE TO LOCAL STRING
     print('assistant methods step 5:: assign firebase uid to string');
     DatabaseReference reference =
-    FirebaseDatabase.instance.reference().child("users").child(userId);
+    FirebaseDatabase.instance.reference().child("Users").child(userId);
     print(
         'assistant methods step 6:: call users document from firebase database using userId');
     reference.once().then(( event) async {

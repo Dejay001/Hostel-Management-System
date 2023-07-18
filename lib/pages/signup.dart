@@ -19,6 +19,7 @@ class Signup extends StatelessWidget {
   User? currentfirebaseUser;
 
   // text editing controllers
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final phonecontroller = TextEditingController();
 
@@ -96,7 +97,7 @@ class Signup extends StatelessWidget {
                             borderRadius:
                             const BorderRadius.all(Radius.circular(30))),
                         width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.56,
+                        height: MediaQuery.of(context).size.height * 0.64,
                         child: Form(
                           key: _formKey,
                           child: Center(
@@ -121,7 +122,12 @@ class Signup extends StatelessWidget {
                                 //   textAlign: TextAlign.start,
                                 // ),
                                 const SizedBox(height: 30),
-
+                                MyTextField(
+                                  controller: usernameController,
+                                  hintText: 'Username',
+                                  obscureText: false,
+                                ),
+                                const SizedBox(height: 10),
                                 MyTextField(
                                   controller: emailController,
                                   hintText: 'Email',
@@ -134,7 +140,7 @@ class Signup extends StatelessWidget {
                                   hintText: 'Password',
                                   obscureText: true,
                                 ),
-                                const SizedBox(height: 30),
+                                const SizedBox(height: 10),
                                 MyTextField(
                                   controller: phonecontroller,
                                   hintText: 'Phone',
@@ -249,6 +255,7 @@ class Signup extends StatelessWidget {
       Map userDataMap = {
 
         "email": emailController.text.trim().toString(),
+        "username": usernameController.text.trim().toString(),
         "phone": phonecontroller.text.trim().toString(),
         // "fullName":fname.text.trim() + lname.text.trim(),
         // "phone": phone.text.trim(),
@@ -282,6 +289,7 @@ class Signup extends StatelessWidget {
     User? user = FirebaseAuth.instance.currentUser;
     if (firebaseUser != null) {
       FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
+        'username':usernameController.text.toString().trim(),
         // 'MobileNumber': _mobileNumber.toString().trim(),
         // 'fullName':_firstName! +  _lastname!,
         'Email': emailController.text.toString().trim(),
