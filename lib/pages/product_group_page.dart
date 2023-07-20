@@ -94,23 +94,23 @@ class ProductGroupPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          IconButton(
-                            splashColor: ColorPalette.timberGreen,
-                            icon: const Icon(
-                              Icons.search,
-                              color: ColorPalette.white,
-                            ),
-                            onPressed: () {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         SearchProductInGroupPage(
-                              //       name: name,
-                              //     ),
-                                //),
-                              //);
-                            },
-                          ),
+                          // IconButton(
+                          //   splashColor: ColorPalette.timberGreen,
+                          //   icon: const Icon(
+                          //     Icons.search,
+                          //     color: ColorPalette.white,
+                          //   ),
+                          //   onPressed: () {
+                          //     // Navigator.of(context).push(
+                          //     //   MaterialPageRoute(
+                          //     //     builder: (context) =>
+                          //     //         SearchProductInGroupPage(
+                          //     //       name: name,
+                          //     //     ),
+                          //       //),
+                          //     //);
+                          //   },
+                          // ),
                           IconButton(
                             icon: const Icon(
                               Icons.delete,
@@ -125,6 +125,9 @@ class ProductGroupPage extends StatelessWidget {
                     ],
                   ),
                 ),
+
+
+
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -46,6 +46,7 @@ class _bookedhostelsState extends State<bookedhostels> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // Set this to false to remove the back arrow
         title: Text('Booking Page'),
       ),
       body: isLoading
@@ -66,10 +67,9 @@ class _bookedhostelsState extends State<bookedhostels> {
                     .height,
 
                 child: ListView.builder(
-                  itemCount: hostelDetailsSnapshot?.docs.length,
+                  itemCount: hostelDetailsSnapshot!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    DocumentSnapshot document = hostelDetailsSnapshot!
-                        .docs[index];
+                    DocumentSnapshot document = hostelDetailsSnapshot!.docs[index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(

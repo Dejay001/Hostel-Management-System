@@ -357,7 +357,7 @@ class _adminState extends State<admin> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => bookedhostels()));

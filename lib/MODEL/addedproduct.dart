@@ -1,6 +1,7 @@
 class addedProduct {
   addedProduct({
     this.name,
+    this.region,
     this.cost,
     this.group,
     this.location,
@@ -11,6 +12,7 @@ class addedProduct {
   });
 
   String? name;
+  String?region;
   String? cost;
   String? group;
   String? location;
@@ -22,6 +24,7 @@ class addedProduct {
   factory addedProduct.fromMap(Map<String, dynamic> json) => addedProduct(
     name: json["name"] as String?,
     cost: json["cost"] as String?,
+    region: json["Region"] as String?,
     group: json["group"] as String?,
     location: json["location"] as String?,
     company: json["company"] as String?,
@@ -31,6 +34,7 @@ class addedProduct {
   );
 
   Map<String, dynamic> toMap() => {
+    "Region":region,
     "name": name,
     "cost": cost,
     "group": group,
