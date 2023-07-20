@@ -1,36 +1,38 @@
 import 'dart:io';
+import 'dart:io' as io;
 
 // import 'package:antoh/Pages/homepage.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
 import 'package:hostelmanagement/widget/progressDialog.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'dart:io' as io;
 import 'package:path/path.dart';
-import 'package:provider/provider.dart';
 
 import '../MODEL/addedproduct.dart';
 import '../main.dart';
+
 class addproduct extends StatefulWidget {
   const addproduct({Key? key, this.group}) : super(key: key);
-final  String? group;
-  @override
-  State<addproduct> createState() => _addproductState( group);
-}
+  final String? group;
 
+  @override
+  State<addproduct> createState() => _addproductState(group);
+}
 
 class _addproductState extends State<addproduct> {
   List<File> _image = [];
+  String selectedRegion = 'Greater Accra'; // Default selected region
 
   String? group;
+
   _addproductState(this.group);
+
   final picker = ImagePicker();
   double val = 0;
   final ImagePicker imagePicker = ImagePicker();
@@ -40,29 +42,32 @@ class _addproductState extends State<addproduct> {
   CollectionReference? imgRef;
   firebase_storage.Reference? ref;
 
-
   @override
   Widget build(BuildContext context) {
-
 //     var firstname = Provider
 //         .of<Users>(context)
 //         .userInfo
 //         ?.id!;
 // var newprojectname=  newProduct.name;
 
-
-
-
-
-
-
-
+    List<String> regions = [
+      'Greater Accra',
+      'Ashanti',
+      'Central',
+      'Eastern',
+      'Western',
+      'Northern',
+      'Volta',
+      'Upper East',
+      'Upper West',
+      'Brong-Ahafo',
+    ];
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: true,
-        foregroundColor:  Color(0xff202020),
+        foregroundColor: Color(0xff202020),
         backgroundColor: Colors.white,
         title: Row(
           children: [
@@ -83,23 +88,20 @@ class _addproductState extends State<addproduct> {
           right: 10,
         ),
         child: FloatingActionButton(
-           onPressed: () async{
-             showDialog(
-                 context: context,
-                 barrierDismissible: false,
-                 builder: (BuildContext context) {
-                   return ProgressDialog(
-                     message: "Adding New Estate,Please wait.....",
-                   );
-                 });
-             String url = await  uploadsFile();
-             uploadsFile();
-             Occupationdb();
+          onPressed: () async {
+            showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return ProgressDialog(
+                    message: "Adding New Estate,Please wait.....",
+                  );
+                });
+            String url = await uploadsFile();
+            uploadsFile();
+            Occupationdb();
             newProduct.group = group;
-            _firestore
-                .collection("Estates")
-                .add({
-
+            _firestore.collection("Estates").add({
               'image': url.toString(),
               'name': newProduct.name.toString(),
               'description': newProduct.description.toString(),
@@ -108,9 +110,9 @@ class _addproductState extends State<addproduct> {
               'Cost': newProduct.cost.toString(),
               'location': newProduct.location,
               'quantity': newProduct.quantity,
+              'Region':selectedRegion,
               //newProduct.toMap()
-               })
-                .then((value) {
+            }).then((value) {
               Navigator.of(context).pop();
               Navigator.of(context).pop();
 
@@ -119,12 +121,12 @@ class _addproductState extends State<addproduct> {
               // showTextToast('Failed!');
             });
             // Navigator.of(context).pop();
-           },
+          },
           splashColor: ColorPalette.bondyBlue,
           backgroundColor: Colors.white,
           child: const Icon(
             Icons.done,
-            color:  Color.fromRGBO(216, 78, 16, 1),
+            color: Color.fromRGBO(216, 78, 16, 1),
           ),
         ),
       ),
@@ -137,7 +139,6 @@ class _addproductState extends State<addproduct> {
             width: double.infinity,
             child: Column(
               children: [
-
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -184,21 +185,39 @@ class _addproductState extends State<addproduct> {
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                  left: 8, bottom: 12,),
+                                                  left: 8,
+                                                  bottom: 12,
+                                                ),
                                                 child: Text(
                                                   "School Name  : $group",
                                                   style: const TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize: 17,
-                                                    color: ColorPalette.nileBlue,
+                                                    color:
+                                                        ColorPalette.nileBlue,
                                                   ),
                                                 ),
                                               ),
-
-
-
                                             ],
                                           ),
+                                        ),
+                                      SizedBox(height: 4),
+                                        Text("Choose A Region"),
+                                        DropdownButton<String>(
+                                          value: selectedRegion,
+                                          onChanged: (String? newValue) {
+                                            setState(() {
+                                              selectedRegion = newValue!;
+                                            });
+                                          },
+                                          items: regions
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -471,61 +490,64 @@ class _addproductState extends State<addproduct> {
                                           ),
                                         ),
                                         const SizedBox(height: 20),
-                                         Padding(
+                                        Padding(
                                           padding: EdgeInsets.only(
                                             left: 8,
                                             bottom: 5,
                                           ),
                                           child: Column(
                                             children: [
-
-
                                               Container(
-
-
-                                                  decoration: BoxDecoration(
-                                                    color: ColorPalette.white,
-                                                    borderRadius:
-                                                    BorderRadius.circular(12),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        offset: const Offset(0, 3),
-                                                        blurRadius: 6,
-                                                        color: ColorPalette.nileBlue
-                                                            .withOpacity(0.1),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  height: 50,
+                                                decoration: BoxDecoration(
+                                                  color: ColorPalette.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      offset:
+                                                          const Offset(0, 3),
+                                                      blurRadius: 6,
+                                                      color: ColorPalette
+                                                          .nileBlue
+                                                          .withOpacity(0.1),
+                                                    ),
+                                                  ],
+                                                ),
+                                                height: 50,
                                                 child: TextFormField(
                                                   initialValue:
-                                                  newProduct.location ?? '',
+                                                      newProduct.location ?? '',
                                                   onChanged: (value) {
                                                     newProduct.location = value;
                                                   },
                                                   textInputAction:
-                                                  TextInputAction.next,
+                                                      TextInputAction.next,
                                                   key: UniqueKey(),
-                                                  keyboardType: TextInputType.text,
+                                                  keyboardType:
+                                                      TextInputType.text,
                                                   style: const TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize: 16,
-                                                    color: ColorPalette.nileBlue,
+                                                    color:
+                                                        ColorPalette.nileBlue,
                                                   ),
                                                   decoration: InputDecoration(
                                                     border: InputBorder.none,
-                                                    hintText: "Location/Digital Address",
+                                                    hintText:
+                                                        "Location/Digital Address",
                                                     filled: true,
-                                                    fillColor: Colors.transparent,
+                                                    fillColor:
+                                                        Colors.transparent,
                                                     hintStyle: TextStyle(
                                                       fontFamily: "Nunito",
                                                       fontSize: 16,
-                                                      color: ColorPalette.nileBlue
+                                                      color: ColorPalette
+                                                          .nileBlue
                                                           .withOpacity(0.58),
                                                     ),
                                                   ),
                                                   cursorColor:
-                                                  ColorPalette.timberGreen,
+                                                      ColorPalette.timberGreen,
                                                 ),
                                               ),
                                             ],
@@ -645,6 +667,7 @@ class _addproductState extends State<addproduct> {
       ),
     );
   }
+
   Future<String> uploadsFile() async {
     int i = 1;
 
@@ -668,7 +691,9 @@ class _addproductState extends State<addproduct> {
 
     return downloadUrl;
   }
+
   io.File? image;
+
   Future<String> uploadFile(io.File image) async {
     // showDialog(
     //     context: context,
@@ -678,7 +703,6 @@ class _addproductState extends State<addproduct> {
     //       //return ;
     //     }
     // );
-
 
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
@@ -691,24 +715,18 @@ class _addproductState extends State<addproduct> {
 
     //upload to firebase storage
 
-    Reference ref = FirebaseStorage.instance
-        .ref()
-        .child("$group/${basename(image.path)}");
+    Reference ref =
+        FirebaseStorage.instance.ref().child("$group/${basename(image.path)}");
 
     await ref.putFile(image);
 
-
     downloadUrl = await ref.getDownloadURL();
-
 
     return downloadUrl;
   }
 
-
-
-
   Occupationdb() async {
-    String url = await  uploadsFile();
+    String url = await uploadsFile();
     Map userDataMap = {
       'Estate': url.toString(),
       'name': newProduct.name.toString(),
@@ -722,9 +740,6 @@ class _addproductState extends State<addproduct> {
 
     EstateList.child("Estates").set(userDataMap);
   }
-
-
-
 
   // Future uploadFile() async {
   //   int i = 1;
