@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/MODEL/assistantmethods.dart';
+import 'package:hostelmanagement/pages/login.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +66,7 @@ class _hosteldetailsState extends State<hosteldetails> {
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
                 bookHostel(document.id);
+
               },
             ),
             TextButton(
@@ -97,17 +99,19 @@ class _hosteldetailsState extends State<hosteldetails> {
       num sub = quantity - int.parse(numbrooms.text);
 
       FirebaseFirestore.instance.collection('Estates').doc(documentId).update({
-        'email': Provider
+        'bookeremail': Provider
             .of<Users>(context, listen: false)
             .userInfo!
             .email!,
         "bookedRoom": numbrooms.text.toString(),
-        "quantity": sub,
+        "Bookstatus":"pending",
+        // "quantity": sub,
 
-        'date': DateTime.now(),
-        'Appartment': documentId,
+        'bookedate': DateTime.now(),
+        'bookedAppartment': documentId,
         // Add more booking details as per your requirements
       });
+displayToast("Thank you, Your booking will be aprroved", context);
     }
   }
   void makeCall(DocumentSnapshot document) {

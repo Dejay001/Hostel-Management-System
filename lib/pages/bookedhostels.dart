@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hostelmanagement/MODEL/assistantmethods.dart';
+import 'package:hostelmanagement/utils/color_palette.dart';
 class bookedhostels extends StatefulWidget {
    bookedhostels({Key? key}) : super(key: key);
 
@@ -14,9 +17,25 @@ class _bookedhostelsState extends State<bookedhostels> {
   String? bookingId;
 String? apartmentId;
 bool isLoading = false;
+  QuerySnapshot? hostelDetailsSnapshot;
 
+  Future<void> fetchHostelDetails() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Estates')
+        .where('Bookstatus', isEqualTo:"pending")
+        .get();
 
+    setState(() {
+      hostelDetailsSnapshot = snapshot;
+    });
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    fetchHostelDetails();
+    AssistantMethods.getCurrentOnlineUserInfo(context);
+  }
 
   Future<void> acceptBooking() async {
     setState(() {
@@ -111,15 +130,55 @@ bool isLoading = false;
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Booking ID:',
-              style: TextStyle(fontSize: 16),
-            ),
-            TextField(
-              onChanged: (value) {
-                setState(() {
-                  bookingId = value;
-                });
+            ListView.builder(
+              itemCount: hostelDetailsSnapshot!.docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                DocumentSnapshot document = hostelDetailsSnapshot!.docs[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    height: 127,
+                    decoration: BoxDecoration(
+                      color: ColorPalette.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(0, 5),
+                          blurRadius: 6,
+                          color: const Color(0xff000000).withOpacity(0.06),
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      leading: Padding(
+                        padding: const EdgeInsets.only(top: 1.0),
+                        child: SizedBox(
+                          height: 87,
+                          width: 57,
+                          child: CachedNetworkImage(
+                            fit: BoxFit.fill,
+                            imageUrl: document['image'],
+                          ),
+                        ),
+                      ),
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 28.0),
+                        child: Text(document['name']),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Cost: \GHS ${document['Cost']}'),
+                          Text('Available Rooms: ${document['quantity']}'),
+                        ],
+                      ),
+                      onTap: () {
+                        // showBookingDialog(document);
+                      },
+                    ),
+                  ),
+                );
               },
             ),
             SizedBox(height: 16),

@@ -10,6 +10,7 @@ List<Category> categoryList = [
   Category("UG-LEGON","assets/images/ug.png"),
   Category("UPSA", "assets/images/UPSA.png"),
   Category("CENTRAL", "assets/images/central.png"),
+  Category("CENTRAL", "assets/images/central.png"),
   // Category("UCC", "assets/images/specialpurpose.jpg"),
 ];
 
