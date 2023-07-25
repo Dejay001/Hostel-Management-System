@@ -5,6 +5,7 @@ import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/MODEL/assistantmethods.dart';
 import 'package:hostelmanagement/pages/login.dart';
 import 'package:hostelmanagement/utils/color_palette.dart';
+import 'package:hostelmanagement/widget/filterbutton.dart';
 import 'package:provider/provider.dart';
 
 class hosteldetails extends StatefulWidget {
@@ -34,6 +35,7 @@ class _hosteldetailsState extends State<hosteldetails> {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('Estates')
         .where('group', isEqualTo: widget.hostelcat)
+        .where("Regions", isEqualTo: selectedLocation)
         .get();
 
     setState(() {
@@ -122,6 +124,7 @@ displayToast("Thank you, Your booking will be aprroved", context);
     // to make the call with the given phone number
     print('Making call to: $phoneNumber');
   }
+  String? selectedLocation; // Store the selected location for filtering
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +166,11 @@ displayToast("Thank you, Your booking will be aprroved", context);
                   "Hostels",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
                 ),
-              ],
+    FilterButton(onFilter: (location) {
+      setState(() {
+        selectedLocation = location;
+      });
+    })],
             ),
           ),
         ),
