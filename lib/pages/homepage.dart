@@ -89,7 +89,7 @@ class _homepageState extends State<homepage> {
               SizedBox(
                 height: 20,
               ),
-              Padding(padding: EdgeInsets.only(right: 20), child: searchBar),
+              // Padding(padding: EdgeInsets.only(right: 20), child: searchBar),
               SizedBox(
                 height: 20,
               ),
@@ -135,10 +135,10 @@ class _homepageState extends State<homepage> {
                       itemCount: categoryList.length,
                       scrollDirection: Axis.horizontal,
                       physics: BouncingScrollPhysics(), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 3,
                         childAspectRatio: 1,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,//Adjust the aspect ratio as per your needs
+                        crossAxisSpacing: 30,
+                        mainAxisSpacing: 100,//Adjust the aspect ratio as per your needs
                     ),
                     ),
                   ),
@@ -160,26 +160,26 @@ class _homepageState extends State<homepage> {
     );
   }
 }
-var searchBar = Container(
-    height: 45,
-    child: TextField(
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search),
-        hintText: 'Search',
-        hintStyle: TextStyle(fontSize: 16),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(
-            width: 0,
-            style: BorderStyle.none,
-          ),
-        ),
-        filled: true,
-        contentPadding: EdgeInsets.all(16),
-        fillColor: Color(0xffdddddd),
-      ),
-    ));
+// var searchBar = Container(
+//     height: 45,
+//     child: TextField(
+//       keyboardType: TextInputType.text,
+//       decoration: InputDecoration(
+//         prefixIcon: Icon(Icons.search),
+//         hintText: 'Search',
+//         hintStyle: TextStyle(fontSize: 16),
+//         border: OutlineInputBorder(
+//           borderRadius: BorderRadius.circular(20),
+//           borderSide: BorderSide(
+//             width: 0,
+//             style: BorderStyle.none,
+//           ),
+//         ),
+//         filled: true,
+//         contentPadding: EdgeInsets.all(16),
+//         fillColor: Color(0xffdddddd),
+//       ),
+//     ));
 class CategoryWidget extends StatelessWidget {
   final addedProduct newProduct = addedProduct();
   final Category category;

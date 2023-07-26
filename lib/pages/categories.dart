@@ -53,7 +53,7 @@ class CategorysWidget extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(20, 30, 20, 10),
           child: Container(
               width: MediaQuery.of(context).size.width*0.04,
-              height: 190,
+              height: 300,
               decoration: BoxDecoration(
                 color: Colors.black,
                 image: DecorationImage(

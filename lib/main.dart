@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/firebase_options.dart';
 import 'package:hostelmanagement/pages/admin.dart';
+import 'package:hostelmanagement/pages/filterpage.dart';
 import 'package:hostelmanagement/pages/homepage.dart';
 import 'package:hostelmanagement/pages/login.dart';
 import 'package:hostelmanagement/pages/signup.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
                 : '/Homepage',
             routes: {
               "/admin": (context) => admin(),
+              // "/filter": (context) => FilterHostelGroupsApp(),
               "/SignUP": (context) => Signup(),
               "/SignIn": (context) => LoginPage(),
               "/Homepage": (context) => homepage(),

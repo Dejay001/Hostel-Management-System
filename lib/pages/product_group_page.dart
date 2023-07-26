@@ -2,16 +2,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hostelmanagement/MODEL/addedproduct.dart';
+import 'package:hostelmanagement/pages/filterpage.dart';
+import 'package:hostelmanagement/widget/filterbutton.dart';
 import '../utils/color_palette.dart';
 import '../widget/product_card.dart';
 import 'addestate.dart';
 
 
-class ProductGroupPage extends StatelessWidget {
+class ProductGroupPage extends StatefulWidget {
   final String? name;
   ProductGroupPage({Key? key, this.name}) : super(key: key);
-
+  String? selectedLocation; // Store the selected location for filtering
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  @override
+  _ProductGroupPageState createState() => _ProductGroupPageState(name);
+}
+
+class _ProductGroupPageState extends State<ProductGroupPage> {
+
+  final String? name;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  String? selectedLocation;
+
+  _ProductGroupPageState(this.name); // Store the selected location for filtering
 
   @override
   Widget build(BuildContext context) {
@@ -94,33 +107,56 @@ class ProductGroupPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          // IconButton(
-                          //   splashColor: ColorPalette.timberGreen,
-                          //   icon: const Icon(
-                          //     Icons.search,
-                          //     color: ColorPalette.white,
-                          //   ),
-                          //   onPressed: () {
-                          //     // Navigator.of(context).push(
-                          //     //   MaterialPageRoute(
-                          //     //     builder: (context) =>
-                          //     //         SearchProductInGroupPage(
-                          //     //       name: name,
-                          //     //     ),
-                          //       //),
-                          //     //);
-                          //   },
-                          // ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.delete,
-                              color: ColorPalette.white,
-                            ),
-                            onPressed: () {
-                              //TODO
-                            },
-                          ),
-                        ],
+
+    FilterButton(onFilter: (location) {
+      setState(() {
+        selectedLocation = location;
+      });
+      // IconButton(
+      //   splashColor: ColorPalette.timberGreen,
+      //   icon: const Icon(
+      //     Icons.search,
+      //     color: ColorPalette.white,
+      //   ),
+      //   onPressed: () {
+      //     // Navigator.of(context).push(
+      //     //   MaterialPageRoute(
+      //     //     builder: (context) =>
+      //     //         SearchProductInGroupPage(
+      //     //       name: name,
+      //     //     ),
+      //       //),
+      //     //);
+      //   },
+      // ),
+
+
+      // IconButton(
+      //   icon: Icon(Icons.filter_list),
+      //   onPressed: () {
+      //     // Navigate to the filter page and get the selected location
+      //     Navigator.of(context)
+      //         .push(MaterialPageRoute(
+      //       builder: (context) => FilterHostelGroupsApp(),
+      //     ))
+      //         .then((selectedLocation) {
+      //       // Update the selected location when the filter page is popped
+      //       if (selectedLocation != null) {
+      //         this.selectedLocation = selectedLocation;
+      //       }
+      //     });
+      //   },
+      // ),
+      IconButton(
+        icon: const Icon(
+          Icons.delete,
+          color: ColorPalette.white,
+        ),
+        onPressed: () {
+          //TODO
+        },
+      );
+    } )],
                       )
                     ],
                   ),
@@ -158,13 +194,21 @@ class ProductGroupPage extends StatelessWidget {
                               fontFamily: "Nunito",
                             ),
                           ),
+    //
+    //                       GestureDetector(
+    //
+    //                           onTap: (){
+    // Navigator.of(context).push(MaterialPageRoute(
+    // builder: (context) {
+    // return               FilterHostelGroupsApp();     }));},
+    //                           child: Text("filtered")),
                           const SizedBox(height: 20),
                           Expanded(
                             child: StreamBuilder(
                               stream: _firestore
                                   .collection("Estates")
                                   .where("group", isEqualTo: name)
-
+                                  .where("Regions", isEqualTo: selectedLocation) // Apply the filter based on selectedLocation
                                   .snapshots(),
                               builder: (
                                 BuildContext context,
@@ -210,3 +254,4 @@ class ProductGroupPage extends StatelessWidget {
     );
   }
 }
+
