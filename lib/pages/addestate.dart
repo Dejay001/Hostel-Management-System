@@ -102,15 +102,15 @@ class _addproductState extends State<addproduct> {
             Occupationdb();
             newProduct.group = group;
             _firestore.collection("Estates").add({
-              'image': url.toString(),
-              'name': newProduct.name.toString(),
-              'description': newProduct.description.toString(),
-              'group': newProduct.group.toString(),
-              'Company': newProduct.company.toString(),
-              'Cost': newProduct.cost.toString(),
-              'location': newProduct.location,
+              'image': url.toString().trim(),
+              'name': newProduct.name.toString().trim(),
+              'description': newProduct.description.toString().trim(),
+              'group': newProduct.group.toString().trim(),
+              'Company': newProduct.company.toString().trim(),
+              'Cost': newProduct.cost.toString().trim(),
+              'location': newProduct.location.toString().trim(),
               'quantity': newProduct.quantity,
-              'Region':selectedRegion,
+              'Region':selectedRegion.trim().toString(),
               //newProduct.toMap()
             }).then((value) {
               Navigator.of(context).pop();

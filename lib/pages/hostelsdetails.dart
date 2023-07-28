@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hostelmanagement/MODEL/Users.dart';
 import 'package:hostelmanagement/MODEL/assistantmethods.dart';
 import 'package:hostelmanagement/pages/login.dart';
@@ -48,16 +49,19 @@ class _hosteldetailsState extends State<hosteldetails> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Choose an action'),
+          title: Text('Book a hostel'),
           content: Container(
-              height: 388,
+              height: 108,
               child: Column(
                 children: [
-                  Text('Do you want to book or call?'),
+                  Text('How many rooms do you want?'),
+                  Text('Enter Only Numbers'),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
                       controller: numbrooms,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     ),
                   )
                 ],

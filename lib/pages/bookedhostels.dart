@@ -67,9 +67,9 @@ class _bookedhostelsState extends State<bookedhostels> {
                     .height,
 
                 child: ListView.builder(
-                  itemCount: hostelDetailsSnapshot!.docs.length,
+                  itemCount: hostelDetailsSnapshot?.docs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    DocumentSnapshot document = hostelDetailsSnapshot!.docs[index];
+                    DocumentSnapshot document = hostelDetailsSnapshot?.docs[index] as DocumentSnapshot<Object?>;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -165,6 +165,28 @@ class _bookedhostelsState extends State<bookedhostels> {
         // Add more booking details as per your requirements
       });
       displayToast("Thank you, Your booking will be aprroved", context);
-
-      //
-    }}}
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('You Approved A Booking'),
+              content: Container(
+                  height: 50,
+                  child: Column(
+                    children: [
+                      Text('Room Approved'),
+                    ],
+                  )),
+              actions: [
+                TextButton(
+                    child: Text("Return"),
+                    onPressed: () {
+                      Navigator.pop(context); // Close the dialog
+                      //   makeCall(document);
+                      // },
+                    }),
+              ],
+            );
+            //
+          });
+    } }}
